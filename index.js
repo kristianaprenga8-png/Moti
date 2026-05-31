@@ -51,8 +51,39 @@ function handleSearchSubmit(event) {
 
   searchCity(searchInput.value);
 }
+function getForecast (city){
+  let apiKey ="66db02e29ab4305o5a5c75fc1b23aet8";
+  let apiUrl ='https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}';
+  console.log(apiUrl);
+}
+
+function displayForecast() {
+  let days = ["Tue", "Wed", "Thu", "Fri", "Sat"];
+  let forecastHtml = "";
+
+  days.forEach(function (day) {
+    forecastHtml =
+      forecastHtml +
+      `
+      <div class="weather-forecast-day">
+        <div class="weather-forecast-date">${day}</div>
+        <div class="weather-forecast-icon">🌤️</div>
+        <div class="weather-forecast-temperatures">
+          <div class="weather-forecast-temperature">
+            <strong>15º</strong>
+          </div>
+          <div class="weather-forecast-temperature">9º</div>
+        </div>
+      </div>
+    `;
+  });
+
+  let forecastElement = document.querySelector("#forecast");
+  forecastElement.innerHTML = forecastHtml;
+};
 
 let searchFormElement = document.querySelector("#search-form");
 searchFormElement.addEventListener("submit", handleSearchSubmit);
 
 searchCity("Berlin");
+displayForecast();
